@@ -14,10 +14,10 @@
         <h3 class="text-muted mb-4">Politeknik Negeri Jember</h3>
 
         <div class="d-flex justify-content-center gap-3">
-            <a href="?url=mahasiswa" class="btn btn-primary btn-lg">
+            <a href="/si-akademik2/public/mahasiswa" class="btn btn-primary btn-lg">
                 Data Mahasiswa
             </a>
-            <a href="?url=dosen" class="btn btn-success btn-lg">
+            <a href="/si-akademik2/public/dosen" class="btn btn-success btn-lg">
                 Data Dosen
             </a>
         </div>

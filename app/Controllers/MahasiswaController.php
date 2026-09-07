@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../Models/Mahasiswa.php';
+
 class MahasiswaController
 {
     public function index()
@@ -10,10 +11,9 @@ class MahasiswaController
         require_once __DIR__ . '/../Views/mahasiswa/index.php';
     }
 
-    public function detail()
+    public function detail($nim)
     {
         $model = new Mahasiswa();
-        $nim = $_GET['nim'];
         $mahasiswa = $model->getByNim($nim);
         require_once __DIR__ . '/../Views/mahasiswa/detail.php';
     }
