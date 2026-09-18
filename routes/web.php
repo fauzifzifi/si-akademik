@@ -1,17 +1,28 @@
 <?php
 
-require_once __DIR__ . '/../app/Controllers/HomeController.php';
 require_once __DIR__ . '/../app/Controllers/MahasiswaController.php';
 require_once __DIR__ . '/../app/Controllers/DosenController.php';
+require_once __DIR__ . '/../app/Controllers/AuthController.php';
 
 $routes = [
     'GET' => [
-        '/' => ['HomeController', 'index'],
+        '/' => ['AuthController', 'loginForm'],
+        '/login' => ['AuthController', 'loginForm'],
+        '/logout' => ['AuthController', 'logout'],
+        '/dashboard' => ['AuthController', 'dashboard'],
         '/mahasiswa' => ['MahasiswaController', 'index'],
         '/mahasiswa/detail/{nim}' => ['MahasiswaController', 'detail'],
         '/dosen' => ['DosenController', 'index'],
     ],
     'POST' => [
-        // nanti dipakai kalau ada form simpan data
+        '/login/process' => ['AuthController', 'login'],
     ],
+];
+
+
+$protectedRoutes = [
+    '/dashboard',
+    '/mahasiswa',
+    '/mahasiswa/detail/{nim}',
+    '/dosen',
 ];

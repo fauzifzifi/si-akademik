@@ -42,7 +42,7 @@
         </table>
     </div>
     <div class="container mt-3 text-end">
-        <a href="/si-akademik2/public/" class="btn btn-secondary btn-sm">
+        <a href="/si-akademik2/public/dashboard" class="btn btn-secondary btn-sm">
             Kembali
         </a>
     </div>

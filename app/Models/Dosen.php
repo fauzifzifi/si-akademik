@@ -7,18 +7,24 @@ class Dosen
         return [
             [
                 'nidn' => '001',
-                'nama' => 'Bapak Ahmad'
+                'nama' => 'Ahmad',
+                'prodi' => 'Teknik Informatika'
             ],
             [
                 'nidn' => '002',
-                'nama' => 'Ibu Siti'
+                'nama' => 'Siti',
+                'prodi' => 'Sistem Informasi'
+            ],
+            [
+                'nidn' => '003',
+                'nama' => 'Budi',
+                'prodi' => 'Teknik Informatika'
             ],
         ];
     }
 
     public function getByNidn($nidn)
     {
-
         $dosen = $this->getAll();
 
         foreach ($dosen as $dsn) {

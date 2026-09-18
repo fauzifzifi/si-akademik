@@ -19,6 +19,7 @@
                 <tr>
                     <th>NIDN</th>
                     <th>Nama</th>
+                    <th>Prodi</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,13 +27,14 @@
                     <tr>
                         <td><?= $dsn['nidn']; ?></td>
                         <td><?= $dsn['nama']; ?></td>
+                        <td><?= $dsn['prodi']; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
     <div class="container mt-3 text-end">
-        <a href="/si-akademik2/public/" class="btn btn-secondary btn-sm">
+        <a href="/si-akademik2/public/dashboard" class="btn btn-secondary btn-sm">
             Kembali
         </a>
     </div>

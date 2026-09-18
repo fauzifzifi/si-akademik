@@ -1,12 +1,13 @@
 <?php
 
+session_start();
+
 require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../app/Middleware/AuthMiddleware.php';
 require_once __DIR__ . '/../routes/web.php';
 
-// Ambil path URL, buang query string
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Hilangkan base path karena project ada di subfolder /si-akademik2/public
 $base = '/si-akademik2/public';
 if (str_starts_with($uri, $base)) {
     $uri = substr($uri, strlen($base));
@@ -15,13 +16,21 @@ $uri = $uri === '' ? '/' : $uri;
 
 $method = $_SERVER['REQUEST_METHOD'];
 
+function checkMiddleware($pattern, $protectedRoutes)
+{
+    if (in_array($pattern, $protectedRoutes)) {
+        $middleware = new AuthMiddleware();
+        $middleware->handle();
+    }
+}
+
 if (isset($routes[$method][$uri])) {
-    // URL persis cocok, tanpa parameter dinamis
+    checkMiddleware($uri, $protectedRoutes);
+
     [$controllerName, $action] = $routes[$method][$uri];
     $controller = new $controllerName();
     $controller->$action();
 } else {
-    // Cek apakah cocok dengan route yang punya {parameter}
     $found = false;
 
     foreach ($routes[$method] as $pattern => $handler) {
@@ -34,6 +43,9 @@ if (isset($routes[$method][$uri])) {
 
         if (preg_match($regex, $uri, $matches)) {
             array_shift($matches);
+
+            checkMiddleware($pattern, $protectedRoutes);
+
             [$controllerName, $action] = $handler;
             $controller = new $controllerName();
             call_user_func_array([$controller, $action], $matches);
