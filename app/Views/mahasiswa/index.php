@@ -31,7 +31,7 @@
                         <td><?= $mhs['nama']; ?></td>
                         <td><?= $mhs['prodi']; ?></td>
                         <td>
-                            <a href="/si-akademik2/public/mahasiswa/detail/<?= $mhs['nim']; ?>"
+                            <a href="/si-akademik/public/mahasiswa/detail/<?= $mhs['nim']; ?>"
                                 class="btn btn-sm btn-primary">
                                 Detail
                             </a>
@@ -42,7 +42,7 @@
         </table>
     </div>
     <div class="container mt-3 text-end">
-        <a href="/si-akademik2/public/dashboard" class="btn btn-secondary btn-sm">
+        <a href="/si-akademik/public/dashboard" class="btn btn-secondary btn-sm">
             Kembali
         </a>
     </div>

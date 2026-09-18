@@ -8,7 +8,7 @@ require_once __DIR__ . '/../routes/web.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$base = '/si-akademik2/public';
+$base = '/si-akademik/public';
 if (str_starts_with($uri, $base)) {
     $uri = substr($uri, strlen($base));
 }

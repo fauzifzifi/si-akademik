@@ -18,7 +18,7 @@
             </div>
         <?php endif; ?>
 
-        <form action="/si-akademik2/public/login/process" method="POST">
+        <form action="/si-akademik/public/login/process" method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required>

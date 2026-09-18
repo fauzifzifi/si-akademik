@@ -18,7 +18,7 @@
                 <p><strong>Nama:</strong> <?php echo $mahasiswa['nama']; ?></p>
                 <p><strong>Program Studi:</strong> <?php echo $mahasiswa['prodi']; ?></p>
 
-                <a href="/si-akademik2/public/mahasiswa" class="btn btn-secondary btn-sm">
+                <a href="/si-akademik/public/mahasiswa" class="btn btn-secondary btn-sm">
                     Kembali
                 </a>
             </div>

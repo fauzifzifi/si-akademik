@@ -18,7 +18,7 @@ class AuthController
         if ($username === $this->validUsername && $password === $this->validPassword) {
             $_SESSION['login'] = true;
             $_SESSION['username'] = $username;
-            header('Location: /si-akademik2/public/dashboard');
+            header('Location: /si-akademik/public/dashboard');
             exit();
         } else {
             $error = 'Invalid username or password';
@@ -31,7 +31,7 @@ class AuthController
         $_SESSION = [];
         session_destroy();
 
-        header('Location: /si-akademik2/public/login');
+        header('Location: /si-akademik/public/login');
         exit();
     }
 

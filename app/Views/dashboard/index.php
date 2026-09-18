@@ -14,9 +14,9 @@
         <p>Selamat datang, <strong><?= $_SESSION['username']; ?></strong>.</p>
 
         <div class="d-flex justify-content-center gap-3 mt-4">
-            <a href="/si-akademik2/public/mahasiswa" class="btn btn-primary">Mahasiswa</a>
-            <a href="/si-akademik2/public/dosen" class="btn btn-success">Dosen</a>
-            <a href="/si-akademik2/public/logout" class="btn btn-danger">Logout</a>
+            <a href="/si-akademik/public/mahasiswa" class="btn btn-primary">Mahasiswa</a>
+            <a href="/si-akademik/public/dosen" class="btn btn-success">Dosen</a>
+            <a href="/si-akademik/public/logout" class="btn btn-danger">Logout</a>
         </div>
     </div>
 </body>
