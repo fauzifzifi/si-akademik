@@ -17,6 +17,7 @@
                 <p><strong>NIM:</strong> <?php echo $mahasiswa['nim']; ?></p>
                 <p><strong>Nama:</strong> <?php echo $mahasiswa['nama']; ?></p>
                 <p><strong>Program Studi:</strong> <?php echo $mahasiswa['prodi']; ?></p>
+                <p><strong>Dosen Pembimbing:</strong> <?php echo $mahasiswa['nama_dosen'] ?? '-'; ?></p>
 
                 <a href="/si-akademik/public/mahasiswa" class="btn btn-secondary btn-sm">
                     Kembali
