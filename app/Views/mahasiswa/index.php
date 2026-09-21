@@ -15,6 +15,12 @@
 
         <h2 class="mb-3">DATA MAHASISWA</h2>
 
+        <div class="text-end mb-2">
+            <a href="/si-akademik/public/mahasiswa/create" class="btn btn-success btn-sm">
+                + Tambah Mahasiswa
+            </a>
+        </div>
+
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
                 <tr>
@@ -28,14 +34,23 @@
             <tbody>
                 <?php foreach ($mahasiswa as $mhs): ?>
                     <tr>
-                        <td><?= $mhs['nim']; ?></td>
-                        <td><?= $mhs['nama']; ?></td>
-                        <td><?= $mhs['prodi']; ?></td>
-                        <td><?= $mhs['nama_dosen'] ?? '-'; ?></td>
+                        <td><?= htmlspecialchars($mhs->getNim()); ?></td>
+                        <td><?= htmlspecialchars($mhs->getNama()); ?></td>
+                        <td><?= htmlspecialchars($mhs->getProdi()); ?></td>
+                        <td><?= htmlspecialchars($mhs->getNamaDosen() ?? '-'); ?></td>
                         <td>
-                            <a href="/si-akademik/public/mahasiswa/detail/<?= $mhs['nim']; ?>"
+                            <a href="/si-akademik/public/mahasiswa/detail/<?= $mhs->getNim(); ?>"
                                 class="btn btn-sm btn-primary">
                                 Detail
+                            </a>
+                            <a href="/si-akademik/public/mahasiswa/edit?nim=<?= $mhs->getNim(); ?>"
+                                class="btn btn-sm btn-warning">
+                                Edit
+                            </a>
+                            <a href="/si-akademik/public/mahasiswa/delete?nim=<?= $mhs->getNim(); ?>"
+                                class="btn btn-sm btn-danger"
+                                onclick="return confirm('Hapus data mahasiswa ini?')">
+                                Hapus
                             </a>
                         </td>
                     </tr>

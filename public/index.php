@@ -5,7 +5,26 @@ session_start();
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../app/Middleware/AuthMiddleware.php';
+require_once __DIR__ . '/../app/Repositories/MahasiswaRepository.php';
 require_once __DIR__ . '/../routes/web.php';
+
+/**
+ * fungsi buat bikin object Controller.
+ * Khusus MahasiswaController, dia butuh MahasiswaRepository dulu baru bisa dibuat,
+ * jadi kita rangkai di sini: Database -> MahasiswaRepository -> MahasiswaController.
+ * Controller lain (Dosen, Auth) masih dibuat biasa pake `new` karena belum diubah.
+ */
+function buatController($namaController)
+{
+    global $database;
+
+    if ($namaController == 'MahasiswaController') {
+        $mahasiswaRepository = new MahasiswaRepository($database);
+        return new MahasiswaController($mahasiswaRepository);
+    }
+
+    return new $namaController();
+}
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -29,7 +48,7 @@ if (isset($routes[$method][$uri])) {
     checkMiddleware($uri, $protectedRoutes);
 
     [$controllerName, $action] = $routes[$method][$uri];
-    $controller = new $controllerName();
+    $controller = buatController($controllerName);
     $controller->$action();
 } else {
     $found = false;
@@ -48,7 +67,7 @@ if (isset($routes[$method][$uri])) {
             checkMiddleware($pattern, $protectedRoutes);
 
             [$controllerName, $action] = $handler;
-            $controller = new $controllerName();
+            $controller = buatController($controllerName);
             call_user_func_array([$controller, $action], $matches);
             $found = true;
             break;

@@ -14,11 +14,15 @@
 
         <div class="card" style="max-width: 400px;">
             <div class="card-body">
-                <p><strong>NIM:</strong> <?php echo $mahasiswa['nim']; ?></p>
-                <p><strong>Nama:</strong> <?php echo $mahasiswa['nama']; ?></p>
-                <p><strong>Program Studi:</strong> <?php echo $mahasiswa['prodi']; ?></p>
-                <p><strong>Dosen Pembimbing:</strong> <?php echo $mahasiswa['nama_dosen'] ?? '-'; ?></p>
+                <p><strong>NIM:</strong> <?= htmlspecialchars($mahasiswa->getNim()); ?></p>
+                <p><strong>Nama:</strong> <?= htmlspecialchars($mahasiswa->getNama()); ?></p>
+                <p><strong>Program Studi:</strong> <?= htmlspecialchars($mahasiswa->getProdi()); ?></p>
+                <p><strong>Dosen Pembimbing:</strong> <?= htmlspecialchars($mahasiswa->getNamaDosen() ?? '-'); ?></p>
 
+                <a href="/si-akademik/public/mahasiswa/edit?nim=<?= $mahasiswa->getNim(); ?>"
+                    class="btn btn-warning btn-sm">
+                    Edit
+                </a>
                 <a href="/si-akademik/public/mahasiswa" class="btn btn-secondary btn-sm">
                     Kembali
                 </a>

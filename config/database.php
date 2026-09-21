@@ -1,11 +1,14 @@
 <?php
+
+require_once __DIR__ . '/../app/Core/Database.php';
+
 $host = 'localhost';
 $dbname = 'si_akademik';
 $username = 'root';
 $password = '';
-$pdo = new PDO(
-    "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
-    $username,
-    $password
-);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+// object Database ini nanti dikasih ke MahasiswaRepository (constructor injection)
+$database = new Database($host, $dbname, $username, $password);
+
+// $pdo ini masih dipake sama DosenController & DosenModel yang belum diubah
+$pdo = $database->getConnection();

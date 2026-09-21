@@ -1,34 +1,84 @@
 <?php
+
+// Ini object Mahasiswa. Beda sama versi lama, class ini gak nyentuh
+// database sama sekali, cuma nyimpen data 1 mahasiswa aja.
+// Atributnya private semua, jadi harus lewat getter/setter kalo mau akses.
 class Mahasiswa
 {
-    private $pdo;
+    private $nim;
+    private $nama;
+    private $prodi;
+    private $dosenId;
+    private $namaDosen; // ini bukan kolom asli, cuma ikutan dari JOIN ke tabel dosen
 
-    public function __construct($pdo)
+    public function __construct($nim, $nama, $prodi, $dosenId = null)
     {
-        $this->pdo = $pdo;
+        $this->setNim($nim);
+        $this->setNama($nama);
+        $this->setProdi($prodi);
+        $this->setDosenId($dosenId);
     }
 
-    public function getAll()
+    // ===== getter =====
+    public function getNim()
     {
-        $sql = "SELECT mahasiswa.*, dosen.nama AS nama_dosen
-                FROM mahasiswa
-                LEFT JOIN dosen
-                ON mahasiswa.dosen_id = dosen.id
-                ORDER BY mahasiswa.nama ASC";
-        $stmt = $this->pdo->query($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->nim;
     }
 
-    public function getByNim($nim)
+    public function getNama()
     {
-        $stmt = $this->pdo->prepare(
-            "SELECT mahasiswa.*, dosen.nama AS nama_dosen
-             FROM mahasiswa
-             LEFT JOIN dosen
-             ON mahasiswa.dosen_id = dosen.id
-             WHERE mahasiswa.nim = :nim"
-        );
-        $stmt->execute(['nim' => $nim]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $this->nama;
+    }
+
+    public function getProdi()
+    {
+        return $this->prodi;
+    }
+
+    public function getDosenId()
+    {
+        return $this->dosenId;
+    }
+
+    public function getNamaDosen()
+    {
+        return $this->namaDosen;
+    }
+
+    // ===== setter (ada validasi dikit) =====
+    public function setNim($nim)
+    {
+        // nim harus angka semua
+        if (!ctype_digit($nim)) {
+            throw new Exception('NIM harus berupa angka');
+        }
+        $this->nim = $nim;
+    }
+
+    public function setNama($nama)
+    {
+        // nama gak boleh kosong
+        if (trim($nama) == '') {
+            throw new Exception('Nama mahasiswa tidak boleh kosong');
+        }
+        $this->nama = $nama;
+    }
+
+    public function setProdi($prodi)
+    {
+        if (trim($prodi) == '') {
+            throw new Exception('Program studi tidak boleh kosong');
+        }
+        $this->prodi = $prodi;
+    }
+
+    public function setDosenId($dosenId)
+    {
+        $this->dosenId = $dosenId;
+    }
+
+    public function setNamaDosen($namaDosen)
+    {
+        $this->namaDosen = $namaDosen;
     }
 }
